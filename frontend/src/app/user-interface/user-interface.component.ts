@@ -35,11 +35,17 @@ export class UserInterfaceComponent implements OnInit {
     this.eventsSubscription = this.events$.subscribe((event) => this.onEvent(event));
   }
 
+  /** Updates the current state to a new state.
+  * @param state: a valid State enum type representing the new state.
+  */
   private changeState(state: State) {
     this.currentState = state;
     this.state.next(state);
   }
 
+  /** Handles transitions between the current state to the new state.
+  * @param event: a valid AppEvent model representing the new event
+  */
   private onEvent(event: AppEvent) {
     switch(this.currentState) {
       case State.IDLE:
@@ -66,6 +72,9 @@ export class UserInterfaceComponent implements OnInit {
     }
   }
 
+  /** Handles transitions from IDLE state to other states.
+  * @param event: a valid AppEvent model representing the new event
+  */
   private handleIdleEvent(event: AppEvent) {
     switch (event.type) {
       case AppEventType.ONE_PERSON:
@@ -77,7 +86,14 @@ export class UserInterfaceComponent implements OnInit {
     }
   }
 
+  /** Handles transitions from ONE_PERSON state to other states.
+  * @param event: a valid AppEvent model representing the new event
+  */
   private handleOnePersonEvent(event: AppEvent) {
+    /** 
+     * The application should transition to MULTIPLE_PEOPLE before going to TWO_PEOPLE_WAVING, so
+     * there should be no state change from ONE_PERSON directly to TWO_PEOPLE_WAVING.
+    */
     switch (event.type) {
       case AppEventType.MULTIPLE_PEOPLE:
         this.changeState(State.MULTIPLE_PEOPLE);
@@ -85,9 +101,15 @@ export class UserInterfaceComponent implements OnInit {
       case AppEventType.ONE_WAVE_DETECTED:
         this.changeState(State.ONE_PERSON_WAVING);
         break;
+      case AppEventType.NOBODY:
+        this.changeState(State.IDLE);
+        break;
     }
   }
 
+  /** Handles transitions from MULTIPLE_PEOPLE state to other states.
+  * @param event: a valid AppEvent model representing the new event
+  */
   private handleMultiplePeopleEvent(event: AppEvent) {
     switch (event.type) {
       case AppEventType.ONE_PERSON:
@@ -105,7 +127,14 @@ export class UserInterfaceComponent implements OnInit {
     }
   }
 
+  /** Handles transitions from ONE_PERSON_WAVING state to other states.
+  * @param event: a valid AppEvent model representing the new event
+  */
   private handleOneWavingEvent(event: AppEvent) {
+    /** 
+     * The application should transition to MULTIPLE_PEOPLE before going to TWO_PEOPLE_WAVING, so
+     * there should be no state change from ONE_PERSON_WAVING directly to TWO_PEOPLE_WAVING.
+    */
     switch (event.type) {
       case AppEventType.ONE_PERSON:
         this.changeState(State.ONE_PERSON);
@@ -113,9 +142,15 @@ export class UserInterfaceComponent implements OnInit {
       case AppEventType.MULTIPLE_PEOPLE:
         this.changeState(State.MULTIPLE_PEOPLE);
         break;
+      case AppEventType.NOBODY:
+        this.changeState(State.IDLE);
+        break;
     }
   }
 
+  /** Handles transitions from TWO_PEOPLE_WAVING state to other states.
+  * @param event: a valid AppEvent model representing the new event
+  */
   private handleTwoWavingEvent(event: AppEvent) {
     switch (event.type) {
       case AppEventType.ONE_PERSON:
@@ -136,15 +171,27 @@ export class UserInterfaceComponent implements OnInit {
     }
   }
 
+  /** Handles transitions from GENERATING state to other states.
+  * @param event: a valid AppEvent model representing the new event
+  */
   private handleGeneratingEvent(event: AppEvent) {
-    switch (event.type) {
-      case AppEventType.GENERATION_COMPLETED:
+    /** 
+     * The application should stay in the GENERATING state until the generation is complete. 
+     * Other events should not result in a state change.
+    */
+    if (event.type === AppEventType.GENERATION_COMPLETED) {
         this.changeState(State.PRESENTING);
-        break;
     }
   }
 
+  /** Handles transitions from PRESENTING state to other states.
+  * @param event: a valid AppEvent model representing the new event
+  */
   private async handlePresentingEvent() {
+    /** 
+     * The application should stay in the PRESENTING state for 15 seconds before switching to IDLE.
+     * This allows the image to be displayed before resetting the application state.
+    */
     await new Promise(r => setTimeout(r, 15000));
     this.changeState(State.IDLE);
   }
