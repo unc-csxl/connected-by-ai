@@ -66,7 +66,7 @@ export class AppEventsService implements OnDestroy {
     for (let i = 0; i < 6; i ++) {
       pplWave.push([]);
     }
-    console.log(this.poseBuffer.length)
+    // console.log(this.poseBuffer.length)
     for (let i = 0; i < this.poseBuffer.length; i++) {
       // Start with index just after pose buffer
       // console.log(this.poseBuffer[i])
@@ -86,7 +86,49 @@ export class AppEventsService implements OnDestroy {
       }
       sumPosesDetected += poses.length;
     }
-    console.log(pplWave)
+    // console.log(pplWave);
+
+    var sumPplWave:Frame[] = [];
+
+    for (let person of pplWave) {
+      let accFrame = {
+        "rwx": 0, 
+        "rwy": 0, 
+        "rsx": 0, 
+        "rsy": 0, 
+        "lwx": 0, 
+        "lwy": 0, 
+        "lsx": 0, 
+        "lsy": 0
+        }
+      // console.log(accFrame);
+      for (let frame of person) {
+        accFrame.rwx += frame.rwx;
+        accFrame.rwy += frame.rwy;
+        accFrame.rsx += frame.rsx;
+        accFrame.rsy += frame.rsy;
+        accFrame.lwx += frame.lwx;
+        accFrame.lwy += frame.lwy;
+        accFrame.lsx += frame.lsx;
+        accFrame.lsy += frame.lsy;
+      }
+      // console.log(accFrame);
+      sumPplWave.push(accFrame);
+    }
+    // console.log(sumPplWave[0]);
+
+    for (var i = 0; i < sumPplWave.length; i ++) {
+      sumPplWave[i].rwx = sumPplWave[i].rwx / pplWave[i].length;
+      sumPplWave[i].rwy = sumPplWave[i].rwy / pplWave[i].length;
+      sumPplWave[i].rsx = sumPplWave[i].rsx / pplWave[i].length;
+      sumPplWave[i].rsy = sumPplWave[i].rsy / pplWave[i].length;
+      sumPplWave[i].lwx = sumPplWave[i].lwx / pplWave[i].length;
+      sumPplWave[i].lwy = sumPplWave[i].lwy / pplWave[i].length;
+      sumPplWave[i].lsx = sumPplWave[i].lsx / pplWave[i].length;
+      sumPplWave[i].lsy = sumPplWave[i].lsy / pplWave[i].length;
+    }
+    console.log(sumPplWave);
+
     let meanPosesDetected = Math.round(sumPosesDetected / this.poseBuffer.length);
     if (meanPosesDetected == 0) {
       this.events.next({type: AppEventType.NOBODY});
@@ -95,6 +137,30 @@ export class AppEventsService implements OnDestroy {
     } else {
       this.events.next({type: AppEventType.MULTIPLE_PEOPLE});
     }
+
+    var onePerson = false;
+    var twoPerson = false;
+
+    if (sumPplWave[0].rwx < sumPplWave[0].rsx && sumPplWave[0].rwy < sumPplWave[0].rsy) {
+      this.events.next({type: AppEventType.ONE_WAVE_DETECTED});
+      onePerson = true;
+    } else if (sumPplWave[0].lwx > sumPplWave[0].lsx && sumPplWave[0].lwy < sumPplWave[0].lsy) {
+      this.events.next({type: AppEventType.ONE_WAVE_DETECTED});
+      onePerson = true;
+    }
+
+    if (sumPplWave[1].rwx < sumPplWave[1].rsx && sumPplWave[1].rwy < sumPplWave[1].rsy) {
+      this.events.next({type: AppEventType.ONE_WAVE_DETECTED});
+      twoPerson = true;
+    } else if (sumPplWave[1].lwx > sumPplWave[1].lsx && sumPplWave[1].lwy < sumPplWave[1].lsy) {
+      this.events.next({type: AppEventType.ONE_WAVE_DETECTED});
+      twoPerson = true;
+    }
+
+    if (onePerson && twoPerson) {
+      this.events.next({type: AppEventType.TWO_WAVES_DETECTED});
+    }
+
   }
 
   ngOnDestroy(): void {
