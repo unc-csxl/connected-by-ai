@@ -59,4 +59,5 @@ Behind the scenes, the key technical pieces include:
 
 ## Resources
 
-opencv.js Pose Estimation Demo: https://codesandbox.io/s/serverless-sunset-008olz2wmn
+TensorFlow Pose Detection: https://github.com/tensorflow/tfjs-models/tree/master/pose-detection
+PoseNet (Multipose Estimation): https://github.com/tensorflow/tfjs-models/tree/master/pose-detection/src/posenet

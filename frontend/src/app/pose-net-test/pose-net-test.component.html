@@ -1,0 +1,16 @@
+<h1>Pose Estimation Test</h1>
+<p>{{ (events$ | async)?.type }}</p>
+<ul>
+    <li *ngFor="let pose of poses$ | async">
+        <div>Score: {{ pose.score }}</div>
+        <table>
+            <tr><td>Point</td><td>Score</td><td>X</td><td>Y</td></tr>
+            <tr *ngFor="let keypoint of pose.keypoints">
+                <td>{{ keypoint.name }}</td>
+                <td>{{ keypoint.score|number:'1.2-2' }}</td>
+                <td>{{ keypoint.x|number:'1.0-0' }}</td>
+                <td>{{ keypoint.y|number:'1.0-0' }}</td>
+            </tr>
+        </table>
+    </li>
+</ul>

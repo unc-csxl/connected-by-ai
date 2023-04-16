@@ -12,10 +12,12 @@ import { LayoutModule } from '@angular/cdk/layout';
 /* Application Specific */
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { PoseNetTestComponent } from './pose-net-test/pose-net-test.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    PoseNetTestComponent,
   ],
   imports: [
     BrowserModule,
