@@ -19,15 +19,15 @@
     "@angular/platform-browser": "~15.2.7",
     "@angular/platform-browser-dynamic": "~15.2.7",
     "@angular/router": "~15.2.7",
+    "@mediapipe/pose": "^0.5.1675469404",
+    "@tensorflow-models/pose-detection": "^2.1.0",
+    "@tensorflow/tfjs-backend-webgl": "^4.4.0",
+    "@tensorflow/tfjs-converter": "^4.4.0",
+    "@tensorflow/tfjs-core": "^4.4.0",
+    "@types/long": "^4.0.0",
     "rxjs": "~7.8.0",
     "tslib": "~2.3.0",
-    "zone.js": "~0.12.0",
-    "@types/long": "^5.0.0",
-    "@tensorflow/tfjs-backend-webgl": "^4.4.0",
-    "@tensorflow/tfjs-core": "^4.4.0",
-    "@tensorflow-models/pose-detection": "^2.1.0",
-    "@tensorflow/tfjs-converter": "^4.4.0",
-    "@mediapipe/pose": "^0.5.1675469404"
+    "zone.js": "~0.12.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~15.2.6",

@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@types/long": "^5.0.0"
+  }
+}
