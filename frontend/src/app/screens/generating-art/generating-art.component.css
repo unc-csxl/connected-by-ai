@@ -18,19 +18,21 @@
     text-align: center;
     animation: loading 5s both;
     animation-iteration-count: infinite;
-    animation-timing-function: ease-out;
+    animation-timing-function: ease-in-out;
 }
 
 .svg-sizing {
     height: 175px;
-    stroke-dasharray: 500;
+    stroke-dasharray: 1000;
     stroke-dashoffset: 0;
-    animation: dash 4s both;
+    animation: dash 5s both;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
 }
 
 @keyframes dash {
     from {
-        stroke-dashoffset: 500;
+        stroke-dashoffset: 2000;
     }
 
     to {
