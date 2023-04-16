@@ -1,0 +1,36 @@
+@import url('https://fonts.cdnfonts.com/css/avenir');
+
+* {
+    font-family: 'Avenir', sans-serif;
+    background-color: black;
+}
+
+.svg-sizing {
+    height: 175px;
+    margin: auto 80px;
+}
+
+.divider-bar {
+    height: 400px;
+    width: 2px;
+    background-color: white;
+}
+
+.element-container {
+    display: flex;
+    justify-content: center;
+    margin: auto 0;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+}
+
+.title {
+    font-size: 25pt;
+    margin: auto 80px;
+    color: white;
+}
