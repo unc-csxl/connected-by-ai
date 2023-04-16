@@ -1,0 +1,61 @@
+@import url('https://fonts.cdnfonts.com/css/avenir');
+
+* {
+    font-family: 'Avenir', sans-serif;
+}
+
+.page-container {
+    background-image: url(../../assets/example-art.png);
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.svg-sizing {
+    height: 50px;
+    opacity: 50%;
+}
+
+.bottom-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.profile-container {
+    display: flex;
+}
+
+.profile {
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    background-color: aqua;
+    border: 2px solid white;
+}
+
+.inner-circle {
+    transform: translateX(15px);
+}
+
+.container {
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.612);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.message-container {
+    color: white;
+    margin: auto;
+    width: 70%;
+    padding-top: 50px;
+}
+
+p,
+li {
+    font-size: 20pt;
+}
