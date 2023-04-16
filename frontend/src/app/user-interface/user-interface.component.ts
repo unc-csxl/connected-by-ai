@@ -46,16 +46,22 @@ export class UserInterfaceComponent implements OnInit {
         this.handleIdleEvent(event);
         break;
       case State.ONE_PERSON:
+        this.handleOnePersonEvent(event);
         break;
       case State.MULTIPLE_PEOPLE:
+        this.handleMultiplePeopleEvent(event);
         break;
       case State.ONE_PERSON_WAVING:
+        this.handleOneWavingEvent(event);
         break;
       case State.TWO_PEOPLE_WAVING:
+        this.handleTwoWavingEvent(event);
         break;
       case State.GENERATING:
+        this.handleGeneratingEvent(event);
         break;
       case State.PRESENTING:
+        this.handlePresentingEvent(event);
         break;
     }
   }
@@ -68,8 +74,117 @@ export class UserInterfaceComponent implements OnInit {
       case AppEventType.MULTIPLE_PEOPLE:
         this.changeState(State.MULTIPLE_PEOPLE);
         break;
+      case AppEventType.ONE_WAVE_DETECTED:
+        break;
+      case AppEventType.TWO_WAVES_DETECTED:
+        break;
+      case AppEventType.NOBODY:
+        break;
     }
   }
+
+  private handleOnePersonEvent(event: AppEvent) {
+    switch (event.type) {
+      case AppEventType.ONE_PERSON:
+        this.changeState(State.ONE_PERSON);
+        break;
+      case AppEventType.MULTIPLE_PEOPLE:
+        this.changeState(State.MULTIPLE_PEOPLE);
+        break;
+      case AppEventType.ONE_WAVE_DETECTED:
+        break;
+      case AppEventType.TWO_WAVES_DETECTED:
+        break;
+      case AppEventType.NOBODY:
+        break;
+    }
+  }
+
+  private handleMultiplePeopleEvent(event: AppEvent) {
+    switch (event.type) {
+      case AppEventType.ONE_PERSON:
+        this.changeState(State.ONE_PERSON);
+        break;
+      case AppEventType.MULTIPLE_PEOPLE:
+        this.changeState(State.MULTIPLE_PEOPLE);
+        break;
+      case AppEventType.ONE_WAVE_DETECTED:
+        break;
+      case AppEventType.TWO_WAVES_DETECTED:
+        break;
+      case AppEventType.NOBODY:
+        break;
+    }
+  }
+
+  private handleOneWavingEvent(event: AppEvent) {
+    switch (event.type) {
+      case AppEventType.ONE_PERSON:
+        this.changeState(State.ONE_PERSON);
+        break;
+      case AppEventType.MULTIPLE_PEOPLE:
+        this.changeState(State.MULTIPLE_PEOPLE);
+        break;
+      case AppEventType.ONE_WAVE_DETECTED:
+        break;
+      case AppEventType.TWO_WAVES_DETECTED:
+        break;
+      case AppEventType.NOBODY:
+        break;
+    }
+  }
+
+  private handleTwoWavingEvent(event: AppEvent) {
+    switch (event.type) {
+      case AppEventType.ONE_PERSON:
+        this.changeState(State.ONE_PERSON);
+        break;
+      case AppEventType.MULTIPLE_PEOPLE:
+        this.changeState(State.MULTIPLE_PEOPLE);
+        break;
+      case AppEventType.ONE_WAVE_DETECTED:
+        break;
+      case AppEventType.TWO_WAVES_DETECTED:
+        break;
+      case AppEventType.NOBODY:
+        break;
+    }
+  }
+
+  private handleGeneratingEvent(event: AppEvent) {
+    switch (event.type) {
+      case AppEventType.ONE_PERSON:
+        this.changeState(State.ONE_PERSON);
+        break;
+      case AppEventType.MULTIPLE_PEOPLE:
+        this.changeState(State.MULTIPLE_PEOPLE);
+        break;
+      case AppEventType.ONE_WAVE_DETECTED:
+        break;
+      case AppEventType.TWO_WAVES_DETECTED:
+        break;
+      case AppEventType.NOBODY:
+        break;
+    }
+  }
+
+  private handlePresentingEvent(event: AppEvent) {
+    switch (event.type) {
+      case AppEventType.ONE_PERSON:
+        this.changeState(State.ONE_PERSON);
+        break;
+      case AppEventType.MULTIPLE_PEOPLE:
+        this.changeState(State.MULTIPLE_PEOPLE);
+        break;
+      case AppEventType.ONE_WAVE_DETECTED:
+        break;
+      case AppEventType.TWO_WAVES_DETECTED:
+        break;
+      case AppEventType.NOBODY:
+        break;
+    }
+  }
+
 
 
 }
