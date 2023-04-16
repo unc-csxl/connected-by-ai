@@ -16,6 +16,9 @@
     color: white;
     font-size: 25pt;
     text-align: center;
+    animation: loading 5s both;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
 }
 
 .svg-sizing {
@@ -33,4 +36,10 @@
     to {
         stroke-dashoffset: 0;
     }
+}
+
+@keyframes loading {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
 }
