@@ -74,28 +74,16 @@ export class UserInterfaceComponent implements OnInit {
       case AppEventType.MULTIPLE_PEOPLE:
         this.changeState(State.MULTIPLE_PEOPLE);
         break;
-      case AppEventType.ONE_WAVE_DETECTED:
-        break;
-      case AppEventType.TWO_WAVES_DETECTED:
-        break;
-      case AppEventType.NOBODY:
-        break;
     }
   }
 
   private handleOnePersonEvent(event: AppEvent) {
     switch (event.type) {
-      case AppEventType.ONE_PERSON:
-        this.changeState(State.ONE_PERSON);
-        break;
       case AppEventType.MULTIPLE_PEOPLE:
         this.changeState(State.MULTIPLE_PEOPLE);
         break;
       case AppEventType.ONE_WAVE_DETECTED:
-        break;
-      case AppEventType.TWO_WAVES_DETECTED:
-        break;
-      case AppEventType.NOBODY:
+        this.changeState(State.ONE_PERSON_WAVING);
         break;
     }
   }
@@ -105,14 +93,14 @@ export class UserInterfaceComponent implements OnInit {
       case AppEventType.ONE_PERSON:
         this.changeState(State.ONE_PERSON);
         break;
-      case AppEventType.MULTIPLE_PEOPLE:
-        this.changeState(State.MULTIPLE_PEOPLE);
-        break;
       case AppEventType.ONE_WAVE_DETECTED:
+        this.changeState(State.ONE_PERSON_WAVING);
         break;
       case AppEventType.TWO_WAVES_DETECTED:
+        this.changeState(State.TWO_PEOPLE_WAVING);
         break;
       case AppEventType.NOBODY:
+        this.changeState(State.IDLE);
         break;
     }
   }
@@ -124,12 +112,6 @@ export class UserInterfaceComponent implements OnInit {
         break;
       case AppEventType.MULTIPLE_PEOPLE:
         this.changeState(State.MULTIPLE_PEOPLE);
-        break;
-      case AppEventType.ONE_WAVE_DETECTED:
-        break;
-      case AppEventType.TWO_WAVES_DETECTED:
-        break;
-      case AppEventType.NOBODY:
         break;
     }
   }
