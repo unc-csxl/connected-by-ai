@@ -61,7 +61,7 @@ export class UserInterfaceComponent implements OnInit {
         this.handleGeneratingEvent(event);
         break;
       case State.PRESENTING:
-        this.handlePresentingEvent(event);
+        this.handlePresentingEvent();
         break;
     }
   }
@@ -143,46 +143,28 @@ export class UserInterfaceComponent implements OnInit {
         this.changeState(State.MULTIPLE_PEOPLE);
         break;
       case AppEventType.ONE_WAVE_DETECTED:
+        this.changeState(State.ONE_PERSON_WAVING);
         break;
       case AppEventType.TWO_WAVES_DETECTED:
+        this.changeState(State.TWO_PEOPLE_WAVING);
         break;
       case AppEventType.NOBODY:
+        this.changeState(State.IDLE);
         break;
     }
   }
 
   private handleGeneratingEvent(event: AppEvent) {
     switch (event.type) {
-      case AppEventType.ONE_PERSON:
-        this.changeState(State.ONE_PERSON);
-        break;
-      case AppEventType.MULTIPLE_PEOPLE:
-        this.changeState(State.MULTIPLE_PEOPLE);
-        break;
-      case AppEventType.ONE_WAVE_DETECTED:
-        break;
-      case AppEventType.TWO_WAVES_DETECTED:
-        break;
-      case AppEventType.NOBODY:
+      case AppEventType.GENERATION_COMPLETED:
+        this.changeState(State.PRESENTING);
         break;
     }
   }
 
-  private handlePresentingEvent(event: AppEvent) {
-    switch (event.type) {
-      case AppEventType.ONE_PERSON:
-        this.changeState(State.ONE_PERSON);
-        break;
-      case AppEventType.MULTIPLE_PEOPLE:
-        this.changeState(State.MULTIPLE_PEOPLE);
-        break;
-      case AppEventType.ONE_WAVE_DETECTED:
-        break;
-      case AppEventType.TWO_WAVES_DETECTED:
-        break;
-      case AppEventType.NOBODY:
-        break;
-    }
+  private async handlePresentingEvent() {
+    await new Promise(r => setTimeout(r, 15000));
+    this.changeState(State.IDLE);
   }
 
 
