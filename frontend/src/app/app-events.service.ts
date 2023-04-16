@@ -19,12 +19,13 @@ export interface AppEvent {
   providedIn: 'root'
 })
 export class AppEventsService implements OnDestroy {
+  BUFFERSIZE: number = 4;
 
   poseSubscription: Subscription;
 
   poseBufferFilled: boolean = false;
   poseBufferIndex: number = 0;
-  poseBuffer: poseDetection.Pose[][] = new Array(4);
+  poseBuffer: poseDetection.Pose[][] = new Array(this.BUFFERSIZE);
 
   private events: Subject<AppEvent> = new Subject();
   public events$: Observable<AppEvent> = this.events.asObservable().pipe(distinctUntilChanged((prev, curr) => prev.type === curr.type));
@@ -49,12 +50,39 @@ export class AppEventsService implements OnDestroy {
 
     // TODO
     let sumPosesDetected = 0;
+    interface Frame {
+      rwx: number;
+      rwy: number;
+      rsx: number;
+      rsy: number;
+      lwx: number;
+      lwy: number;
+      lsx: number;
+      lsy: number;
+    }
+
+    let pplWave:Frame[][] = [];
     for (let i = 0; i < this.poseBuffer.length; i++) {
       // Start with index just after pose buffer
+      // console.log(this.poseBuffer[i])
       let index = (this.poseBufferIndex + 1 + i) % this.poseBuffer.length;
       let poses = this.poseBuffer[index];
+      for (let x = 0; x < poses.length; x ++) {
+        pplWave[x] = [];
+        pplWave[x].push({
+        "rwx": poses[x].keypoints[10].x, 
+        "rwy": poses[x].keypoints[10].y, 
+        "rsx": poses[x].keypoints[6].x, 
+        "rsy": poses[x].keypoints[6].y, 
+        "lwx": poses[x].keypoints[9].x, 
+        "lwy": poses[x].keypoints[9].y, 
+        "lsx": poses[x].keypoints[5].x, 
+        "lsy": poses[x].keypoints[5].y
+        })
+      }
       sumPosesDetected += poses.length;
     }
+    console.log(pplWave)
     let meanPosesDetected = Math.round(sumPosesDetected / this.poseBuffer.length);
     if (meanPosesDetected == 0) {
       this.events.next({type: AppEventType.NOBODY});
