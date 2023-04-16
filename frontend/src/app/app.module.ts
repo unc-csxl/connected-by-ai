@@ -20,6 +20,7 @@ import { GeneratedImageSlideComponent } from './screens/generated-image-slide/ge
 import { OnePersonMessageComponent } from './screens/one-person-message/one-person-message.component';
 import { InstructionsScreenComponent } from './screens/instructions-screen/instructions-screen.component';
 import { GeneratingArtComponent } from './screens/generating-art/generating-art.component';
+import { ArtTestComponent } from './art-test/art-test.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { GeneratingArtComponent } from './screens/generating-art/generating-art.
     OnePersonMessageComponent,
     InstructionsScreenComponent,
     GeneratingArtComponent,
+    ArtTestComponent,
   ],
   imports: [
     BrowserModule,

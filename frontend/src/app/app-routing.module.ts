@@ -8,6 +8,8 @@ import { OnePersonMessageComponent } from './screens/one-person-message/one-pers
 import { InstructionsScreenComponent } from './screens/instructions-screen/instructions-screen.component';
 import { GeneratingArtComponent } from './screens/generating-art/generating-art.component';
 import { UserInterfaceComponent } from './user-interface/user-interface.component';
+import { ArtTestComponent } from './art-test/art-test.component';
+
 
 const routes: Routes = [
   { path: "", component: UserInterfaceComponent },
@@ -17,7 +19,8 @@ const routes: Routes = [
   { path: "generated-image", component: GeneratedImageSlideComponent },
   { path: "one-person", component: OnePersonMessageComponent },
   { path: "instructions", component: InstructionsScreenComponent },
-  { path: "generating", component: GeneratingArtComponent }
+  { path: "generating", component: GeneratingArtComponent },
+  { path: "art", component: ArtTestComponent },
 ];
 
 @NgModule({
