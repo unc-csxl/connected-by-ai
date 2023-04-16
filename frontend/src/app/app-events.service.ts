@@ -62,13 +62,17 @@ export class AppEventsService implements OnDestroy {
     }
 
     let pplWave:Frame[][] = [];
+    // loop through all poses to find max number of poses (later)
+    for (let i = 0; i < 6; i ++) {
+      pplWave.push([]);
+    }
+    console.log(this.poseBuffer.length)
     for (let i = 0; i < this.poseBuffer.length; i++) {
       // Start with index just after pose buffer
       // console.log(this.poseBuffer[i])
       let index = (this.poseBufferIndex + 1 + i) % this.poseBuffer.length;
       let poses = this.poseBuffer[index];
       for (let x = 0; x < poses.length; x ++) {
-        pplWave[x] = [];
         pplWave[x].push({
         "rwx": poses[x].keypoints[10].x, 
         "rwy": poses[x].keypoints[10].y, 
