@@ -66,10 +66,9 @@ export class AppEventsService implements OnDestroy {
     for (let i = 0; i < 6; i ++) {
       pplWave.push([]);
     }
-    // console.log(this.poseBuffer.length)
+
     for (let i = 0; i < this.poseBuffer.length; i++) {
       // Start with index just after pose buffer
-      // console.log(this.poseBuffer[i])
       let index = (this.poseBufferIndex + 1 + i) % this.poseBuffer.length;
       let poses = this.poseBuffer[index];
       for (let x = 0; x < poses.length; x ++) {
@@ -86,7 +85,6 @@ export class AppEventsService implements OnDestroy {
       }
       sumPosesDetected += poses.length;
     }
-    // console.log(pplWave);
 
     var sumPplWave:Frame[] = [];
 
@@ -101,7 +99,7 @@ export class AppEventsService implements OnDestroy {
         "lsx": 0, 
         "lsy": 0
         }
-      // console.log(accFrame);
+
       for (let frame of person) {
         accFrame.rwx += frame.rwx;
         accFrame.rwy += frame.rwy;
@@ -112,10 +110,8 @@ export class AppEventsService implements OnDestroy {
         accFrame.lsx += frame.lsx;
         accFrame.lsy += frame.lsy;
       }
-      // console.log(accFrame);
       sumPplWave.push(accFrame);
     }
-    // console.log(sumPplWave[0]);
 
     for (var i = 0; i < sumPplWave.length; i ++) {
       sumPplWave[i].rwx = sumPplWave[i].rwx / pplWave[i].length;
@@ -127,7 +123,6 @@ export class AppEventsService implements OnDestroy {
       sumPplWave[i].lsx = sumPplWave[i].lsx / pplWave[i].length;
       sumPplWave[i].lsy = sumPplWave[i].lsy / pplWave[i].length;
     }
-    console.log(sumPplWave);
 
     let meanPosesDetected = Math.round(sumPosesDetected / this.poseBuffer.length);
     if (meanPosesDetected == 0) {
@@ -138,26 +133,19 @@ export class AppEventsService implements OnDestroy {
       this.events.next({type: AppEventType.MULTIPLE_PEOPLE});
     }
 
-    var onePerson = false;
-    var twoPerson = false;
+    var counter = 0;
 
-    if (sumPplWave[0].rwx < sumPplWave[0].rsx && sumPplWave[0].rwy < sumPplWave[0].rsy) {
-      this.events.next({type: AppEventType.ONE_WAVE_DETECTED});
-      onePerson = true;
-    } else if (sumPplWave[0].lwx > sumPplWave[0].lsx && sumPplWave[0].lwy < sumPplWave[0].lsy) {
-      this.events.next({type: AppEventType.ONE_WAVE_DETECTED});
-      onePerson = true;
+    for (let i = 0; i < sumPplWave.length; i ++) {
+      if (sumPplWave[i].rwx < sumPplWave[i].rsx && sumPplWave[i].rwy < sumPplWave[i].rsy) {
+        this.events.next({type: AppEventType.ONE_WAVE_DETECTED});
+        counter ++;
+      } else if (sumPplWave[i].lwx > sumPplWave[i].lsx && sumPplWave[i].lwy < sumPplWave[i].lsy) {
+        this.events.next({type: AppEventType.ONE_WAVE_DETECTED});
+        counter ++;
+      }
     }
 
-    if (sumPplWave[1].rwx < sumPplWave[1].rsx && sumPplWave[1].rwy < sumPplWave[1].rsy) {
-      this.events.next({type: AppEventType.ONE_WAVE_DETECTED});
-      twoPerson = true;
-    } else if (sumPplWave[1].lwx > sumPplWave[1].lsx && sumPplWave[1].lwy < sumPplWave[1].lsy) {
-      this.events.next({type: AppEventType.ONE_WAVE_DETECTED});
-      twoPerson = true;
-    }
-
-    if (onePerson && twoPerson) {
+    if (counter > 1) {
       this.events.next({type: AppEventType.TWO_WAVES_DETECTED});
     }
 
