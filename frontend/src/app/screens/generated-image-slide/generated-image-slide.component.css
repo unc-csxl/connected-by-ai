@@ -1,0 +1,37 @@
+.page-container {
+    background-image: url(../../assets/example-art.png);
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.svg-sizing {
+    height: 50px;
+    opacity: 50%;
+}
+
+.bottom-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.profile-container {
+    display: flex;
+}
+
+.profile {
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    background-color: aqua;
+    border: 2px solid white;
+}
+
+.inner-circle {
+    transform: translateX(15px);
+}
