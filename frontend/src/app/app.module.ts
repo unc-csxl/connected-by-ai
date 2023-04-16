@@ -13,11 +13,15 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PoseNetTestComponent } from './pose-net-test/pose-net-test.component';
+import { UserInterfaceComponent } from './user-interface/user-interface.component';
+import { TestInterfaceComponent } from './test-interface/test-interface.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PoseNetTestComponent,
+    UserInterfaceComponent,
+    TestInterfaceComponent,
   ],
   imports: [
     BrowserModule,

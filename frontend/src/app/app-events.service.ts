@@ -24,7 +24,7 @@ export class AppEventsService implements OnDestroy {
 
   poseBufferFilled: boolean = false;
   poseBufferIndex: number = 0;
-  poseBuffer: poseDetection.Pose[][] = new Array(5);
+  poseBuffer: poseDetection.Pose[][] = new Array(4);
 
   private events: Subject<AppEvent> = new Subject();
   public events$: Observable<AppEvent> = this.events.asObservable().pipe(distinctUntilChanged((prev, curr) => prev.type === curr.type));

@@ -6,6 +6,8 @@ import '@tensorflow/tfjs-backend-webgl';
 import * as poseDetection from '@tensorflow-models/pose-detection'
 import { BehaviorSubject, Observable, Subject, combineLatestWith, from, map } from 'rxjs';
 
+const FRAMES_PER_SECOND_GOAL = 30;
+
 const VIDEO_CONFIG = {
   'audio': false,
   'video': {
@@ -13,7 +15,7 @@ const VIDEO_CONFIG = {
     width: 720,
     height: 480,
     frameRate: {
-      ideal: 60
+      ideal: FRAMES_PER_SECOND_GOAL
     }
   }
 };
@@ -80,7 +82,7 @@ export class PoseEstimationService {
         this.poses.next(filteredPoses);
         this.runDetection();
       });
-    }, 1000 / 15);
+    }, 1000 / FRAMES_PER_SECOND_GOAL);
   }
 
 }
