@@ -15,6 +15,11 @@ import { AppComponent } from './app.component';
 import { PoseNetTestComponent } from './pose-net-test/pose-net-test.component';
 import { UserInterfaceComponent } from './user-interface/user-interface.component';
 import { TestInterfaceComponent } from './test-interface/test-interface.component';
+import { IntroductionScreenComponent } from './screens/introduction-screen/introduction-screen.component';
+import { GeneratedImageSlideComponent } from './screens/generated-image-slide/generated-image-slide.component';
+import { OnePersonMessageComponent } from './screens/one-person-message/one-person-message.component';
+import { InstructionsScreenComponent } from './screens/instructions-screen/instructions-screen.component';
+import { GeneratingArtComponent } from './screens/generating-art/generating-art.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +27,11 @@ import { TestInterfaceComponent } from './test-interface/test-interface.componen
     PoseNetTestComponent,
     UserInterfaceComponent,
     TestInterfaceComponent,
+    IntroductionScreenComponent,
+    GeneratedImageSlideComponent,
+    OnePersonMessageComponent,
+    InstructionsScreenComponent,
+    GeneratingArtComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,4 +43,4 @@ import { TestInterfaceComponent } from './test-interface/test-interface.componen
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
