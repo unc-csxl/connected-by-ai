@@ -5,7 +5,7 @@
 }
 
 .page-container {
-    background-image: url(../images/example-art.png);
+    background-image: url(../../../assets/example-art.png);
     height: 100vh;
     background-repeat: no-repeat;
     background-position: center;
