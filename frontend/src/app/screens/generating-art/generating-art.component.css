@@ -1,0 +1,36 @@
+@import url('https://fonts.cdnfonts.com/css/avenir');
+
+* {
+    font-family: 'Avenir', sans-serif;
+    background-color: black;
+}
+
+.page-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.generating-text {
+    color: white;
+    font-size: 25pt;
+    text-align: center;
+}
+
+.svg-sizing {
+    height: 175px;
+    stroke-dasharray: 500;
+    stroke-dashoffset: 0;
+    animation: dash 4s both;
+}
+
+@keyframes dash {
+    from {
+        stroke-dashoffset: 500;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
