@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MockAppEventsService } from '../mock-app-events.service';
 import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import { AppEvent, AppEventType } from '../app-events.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
-enum State {
+export enum State {
   IDLE = "IDLE",
   ONE_PERSON = "ONE_PERSON",
   MULTIPLE_PEOPLE = "MULTIPLE_PEOPLE",
@@ -16,9 +17,17 @@ enum State {
 @Component({
   selector: 'app-user-interface',
   templateUrl: './user-interface.component.html',
-  styleUrls: ['./user-interface.component.css']
+  styleUrls: ['./user-interface.component.css'],
+  animations: [
+    trigger('enterTrigger', [
+      transition(':enter', [style({opacity: 0, zIndex: 2}), animate("2000ms ease-in", style({opacity: 1, zIndex: 2}))]),
+      transition(':leave', [style({opacity: 1, zIndex: 1}), animate("1000ms ease-out", style({opacity: 0, zIndex: 1}))]),
+    ])
+  ]
 })
 export class UserInterfaceComponent implements OnInit {
+
+  State = State;
 
   events$: Observable<AppEvent>;
   eventsSubscription!: Subscription;

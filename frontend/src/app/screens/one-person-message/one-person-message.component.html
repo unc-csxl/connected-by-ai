@@ -1,6 +1,9 @@
 <div class="page-container">
-    <div class="message-container">
-        <p class="message-text">Grab a Friend</p>
+
+    <div class="message-container" [ngSwitch]="state">
+        <p class="message-text" *ngSwitchCase="State.ONE_PERSON">Grab a Friend</p>
+        <p class="message-text" *ngSwitchCase="State.MULTIPLE_PEOPLE">Wave</p>
+        <p class="message-text" *ngSwitchCase="State.ONE_PERSON_WAVING">Wave Together</p>
     </div>
 
     <div class="bottom-container">
