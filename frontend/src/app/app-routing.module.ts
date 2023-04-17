@@ -7,9 +7,10 @@ import { GeneratedImageSlideComponent } from './screens/generated-image-slide/ge
 import { OnePersonMessageComponent } from './screens/one-person-message/one-person-message.component';
 import { InstructionsScreenComponent } from './screens/instructions-screen/instructions-screen.component';
 import { GeneratingArtComponent } from './screens/generating-art/generating-art.component';
-
+import { UserInterfaceComponent } from './user-interface/user-interface.component';
 
 const routes: Routes = [
+  { path: "", component: UserInterfaceComponent },
   { path: "test", component: TestInterfaceComponent },
   { path: "posenet", component: PoseNetTestComponent },
   { path: "home", component: IntroductionScreenComponent },

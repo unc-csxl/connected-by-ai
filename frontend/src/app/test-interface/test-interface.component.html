@@ -1,9 +1,11 @@
-<h1>UI Event Tester</h1>
 <div>
     <button (click)="event(AppEventType.NOBODY)">NOBODY</button>
     <button (click)="event(AppEventType.ONE_PERSON)">ONE_PERSON</button>
     <button (click)="event(AppEventType.MULTIPLE_PEOPLE)">MULTIPLE_PEOPLE</button>
     <button (click)="event(AppEventType.ONE_WAVE_DETECTED)">ONE_WAVE_DETECTED</button>
     <button (click)="event(AppEventType.TWO_WAVES_DETECTED)">TWO_WAVES_DETECTED</button>
+    <button (click)="event(AppEventType.GENERATION_COMPLETED)">GENERATION_COMPLETED</button>
 </div>
-<app-user-interface></app-user-interface>
+<div>
+    <app-user-interface [test]="true"></app-user-interface>
+</div>

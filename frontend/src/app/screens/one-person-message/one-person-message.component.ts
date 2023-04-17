@@ -1,10 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { State } from '../../user-interface/user-interface.component';
 
 @Component({
   selector: 'app-one-person-message',
   templateUrl: './one-person-message.component.html',
   styleUrls: ['./one-person-message.component.css']
 })
-export class OnePersonMessageComponent {
+export class OnePersonMessageComponent implements OnChanges {
+
+  State = State;
+
+  @Input('state')
+  state!: State;
+
+  ngOnChanges(): void {
+    console.log(this.state);
+  }
 
 }

@@ -61,7 +61,8 @@ export class PoseEstimationService {
           video.srcObject = stream;
           video.style.position = "fixed";
           video.style.top = "0";
-          video.style.right = "0";
+          video.style.right = "10";
+          video.style.visibility = 'hidden';
           return video;
         })
       );

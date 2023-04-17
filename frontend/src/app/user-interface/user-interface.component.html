@@ -1,2 +1,9 @@
-<p>USER INTERFACE</p>
-State: {{ state$ | async }}
+<ng-container *ngIf="state$ | async as state">
+    <div class="container" [ngSwitch]="true"><!-- this ngSwitch is a hack until ngSwitchCases: https://github.com/angular/angular/issues/14659 -->
+        <app-introduction-screen *ngSwitchCase="state === State.IDLE" @enterTrigger></app-introduction-screen>
+        <app-one-person-message [state]="state" *ngSwitchCase="state === State.ONE_PERSON" @enterTrigger></app-one-person-message>
+        <app-instructions-screen *ngSwitchCase="state === State.MULTIPLE_PEOPLE || state === State.ONE_PERSON_WAVING" @enterTrigger></app-instructions-screen>
+        <app-generating-art *ngSwitchCase="state === State.GENERATING" @enterTrigger></app-generating-art>
+        <app-generated-image-slide *ngSwitchCase="state === State.PRESENTING" @enterTrigger></app-generated-image-slide>
+    </div>
+</ng-container>
