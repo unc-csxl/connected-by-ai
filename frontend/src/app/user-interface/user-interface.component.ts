@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EnvironmentInjector, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import { MockAppEventsService } from '../mock-app-events.service';
 import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
-import { AppEvent, AppEventType } from '../app-events.service';
+import { AppEvent, AppEventType, AppEventsService } from '../app-events.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 export enum State {
@@ -20,28 +20,41 @@ export enum State {
   styleUrls: ['./user-interface.component.css'],
   animations: [
     trigger('enterTrigger', [
-      transition(':enter', [style({opacity: 0, zIndex: 2}), animate("2000ms ease-in", style({opacity: 1, zIndex: 2}))]),
-      transition(':leave', [style({opacity: 1, zIndex: 1}), animate("1000ms ease-out", style({opacity: 0, zIndex: 1}))]),
+      transition(':enter', [style({opacity: 0, zIndex: 20, top: 0}), animate("2000ms ease-in", style({opacity: 1, zIndex: 20}))]),
+      transition(':leave', [style({opacity: 1, zIndex: 1, top: 0}), animate("1000ms ease-out", style({opacity: 0, zIndex: 1}))]),
     ])
   ]
 })
-export class UserInterfaceComponent implements OnInit {
+export class UserInterfaceComponent implements AfterViewInit {
+
+  @Input()
+  test: boolean = false;
 
   State = State;
 
-  events$: Observable<AppEvent>;
+  events$?: Observable<AppEvent>;
   eventsSubscription!: Subscription;
 
   private currentState: State = State.IDLE;
   private state: Subject<State> = new BehaviorSubject<State>(this.currentState);
   state$: Observable<State> = this.state.asObservable();
 
-  constructor(eventsService: MockAppEventsService) {
-    this.events$ = eventsService.events$;
+  constructor(private mockEventsService: MockAppEventsService, private injector: EnvironmentInjector) {
   }
 
-  ngOnInit(): void {
-    this.eventsSubscription = this.events$.subscribe((event) => this.onEvent(event));
+  ngAfterViewInit(): void {
+    if (this.events$) { return; }
+
+    if (this.test) {
+      this.events$ = this.mockEventsService.events$;
+      this.eventsSubscription = this.events$.subscribe((event) => this.onEvent(event));
+    } else {
+      this.injector.runInContext(() => {
+        let appEventService = inject(AppEventsService);
+        this.events$ = appEventService.events$;
+        this.eventsSubscription = this.events$.subscribe((event) => this.onEvent(event));
+      });
+    }
   }
 
   /** Updates the current state to a new state.

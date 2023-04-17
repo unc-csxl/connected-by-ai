@@ -1,8 +1,8 @@
-.container {
+:host {
     background: black;
-    position: relative;
 }
 
 .container > .ng-star-inserted {
-    position: relative;
+    position: absolute;
+    background: black;
 }
