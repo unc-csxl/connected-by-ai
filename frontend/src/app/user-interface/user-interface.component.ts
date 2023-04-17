@@ -21,7 +21,7 @@ export enum State {
   animations: [
     trigger('enterTrigger', [
       transition(':enter', [style({opacity: 0, zIndex: 20, top: 0}), animate("2000ms ease-in", style({opacity: 1, zIndex: 20}))]),
-      transition(':leave', [style({opacity: 1, zIndex: 1, top: 0}), animate("1000ms ease-out", style({opacity: 0, zIndex: 1}))]),
+      transition(':leave', [style({opacity: 1, zIndex: 1, top: 0}), animate("2000ms ease-in", style({opacity: 0, zIndex: 1}))]),
     ])
   ]
 })
