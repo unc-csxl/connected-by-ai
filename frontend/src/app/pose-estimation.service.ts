@@ -22,8 +22,8 @@ const VIDEO_CONFIG = {
 
 const DETECTION_CONFIG: poseDetection.PosenetModelConfig = {
   inputResolution: { width: 720, height: 480 },
-  architecture: 'ResNet50',
-  // architecture: 'MobileNetV1',
+  // architecture: 'ResNet50',
+  architecture: 'MobileNetV1',
   quantBytes: 4,
   outputStride: 16
 };
