@@ -16,10 +16,10 @@ const routes: Routes = [
   { path: "test", component: TestInterfaceComponent },
   { path: "posenet", component: PoseNetTestComponent },
   { path: "home", component: IntroductionScreenComponent },
-  { path: "generated-image", component: GeneratedImageSlideComponent },
   { path: "one-person", component: OnePersonMessageComponent },
   { path: "instructions", component: InstructionsScreenComponent },
   { path: "generating", component: GeneratingArtComponent },
+  { path: "generated-image", component: GeneratedImageSlideComponent },
   { path: "art", component: ArtTestComponent },
 ];
 

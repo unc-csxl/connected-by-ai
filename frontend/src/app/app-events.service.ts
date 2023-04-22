@@ -12,14 +12,49 @@ export enum AppEventType {
   GENERATION_COMPLETED = "GENERATION_COMPLETED"
 }
 
-export interface AppEvent {
-  type: AppEventType;
+type NobodyEvent = {
+  type: AppEventType.NOBODY;
+};
+
+type OnePersonEvent = {
+  type: AppEventType.ONE_PERSON;
+};
+
+type MultiplePeopleEvent = {
+  type: AppEventType.MULTIPLE_PEOPLE;
+};
+
+type OneWaveEvent = {
+  type: AppEventType.ONE_WAVE_DETECTED;
+};
+
+type TwoWaveEvent = {
+  type: AppEventType.TWO_WAVES_DETECTED;
+  // TODO: Add bounding box images
+};
+
+type GenerationCompletedEvent = {
+  type: AppEventType.GENERATION_COMPLETED;
+  data: string;
+}
+
+export type AppEvent =
+  | NobodyEvent
+  | OnePersonEvent
+  | MultiplePeopleEvent
+  | OneWaveEvent
+  | TwoWaveEvent
+  | GenerationCompletedEvent;
+
+export interface IAppEventsService extends OnDestroy {
+  events$: Observable<AppEvent>;
+  generateArt(): void;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class AppEventsService implements OnDestroy {
+export class AppEventsService implements IAppEventsService {
   BUFFERSIZE: number = 10;
 
   poseSubscription: Subscription;
@@ -33,6 +68,10 @@ export class AppEventsService implements OnDestroy {
 
   constructor(poseEstimation: PoseEstimationService) {
     this.poseSubscription = poseEstimation.poses$.subscribe((poses) => this.process(poses));
+  }
+
+  public generateArt(): void {
+
   }
 
   private process(poses: poseDetection.Pose[]): void {

@@ -17,4 +17,5 @@ reverse_proxy /auth/* http://localhost:1561
 reverse_proxy /openapi.json http://localhost:1561
 reverse_proxy /sdapi/v1/txt2img http://localhost:7860
 reverse_proxy /sdapi/v1/extra-single-image http://localhost:7860
+reverse_proxy /sdapi/v1/progress http://localhost:7860
 reverse_proxy * http://localhost:1562

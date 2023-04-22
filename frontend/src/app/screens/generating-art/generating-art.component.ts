@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ArtGeneratorService } from 'src/app/art-generator.service';
 
 @Component({
   selector: 'app-generating-art',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./generating-art.component.css']
 })
 export class GeneratingArtComponent {
+
+  public constructor(private artGenerator: ArtGeneratorService) {
+
+  }
 
 }

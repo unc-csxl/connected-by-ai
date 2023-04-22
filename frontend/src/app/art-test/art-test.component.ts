@@ -1,16 +1,24 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ArtGeneratorService } from '../art-generator.service';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-art-test',
   templateUrl: './art-test.component.html',
-  styleUrls: ['./art-test.component.css']
+  styleUrls: ['./art-test.component.css'],
+  animations: [
+    trigger('smoothEntrance', [
+      transition(':enter', [style({opacity: 0, zIndex: 1}), animate("2000ms linear", style({opacity: 1, zIndex: 1}))]),
+      transition(':leave', [style({opacity: 1, zIndex: 20}), animate("1000ms linear", style({opacity: 0, zIndex: 20}))]),
+    ]),
+  ]
 })
 export class ArtTestComponent implements AfterViewInit {
 
   @ViewChild('art') art!: ElementRef<HTMLImageElement>;
 
-  constructor(private artGenerator: ArtGeneratorService) {
+  constructor(public artGenerator: ArtGeneratorService) {
+    this.artGenerator.generate("well lit high resolution detailed dogwood trees in the spring morning sunshine in north carolina in the style of georges seurat impressionism detailed painting strokes", "wall hanging, frame, border, margin, low quality, signature, artist");
   }
 
   ngAfterViewInit(): void {
@@ -32,11 +40,11 @@ export class ArtTestComponent implements AfterViewInit {
     // REALLY good w/ 50: this.artGenerator.generate("highly detailed, realistic still life oil painting of sunflowers in the style of vincent van gogh with heavy brush strokes", "wall hanging frame border margin fake unrealistic low quality").subscribe((result) => {
     // this.artGenerator.generate("highly detailed, sharp, realistic oil painting of a powerful, gentle, happy ram in the style of vincent van gogh with heavy brush strokes and carolina blue colors", "wall hanging frame border margin fake unrealistic low quality").subscribe((result) => {
     // V GOOD w/ 35 this.artGenerator.generate("well lit high resolution dogwood trees in the spring morning sunshine in north carolina in the style of georges seurat neo impressionism chromo-luminarism detailed painting strokes", "wall hanging frame border margin fake low quality signature artist").subscribe((result) => {
-    this.artGenerator.generate("well lit high resolution detailed dogwood trees in the spring morning sunshine in north carolina in the style of georges seurat impressionism detailed painting strokes", "wall hanging, frame, border, margin, low quality, signature, artist").subscribe((result) => {
-      this.artGenerator.scale(result.images[0]).subscribe((result) => {
-        this.art.nativeElement.src = `data:img/png;base64,${result.image}`
-      });
-    });  
+    // this.artGenerator.generate("well lit high resolution detailed dogwood trees in the spring morning sunshine in north carolina in the style of georges seurat impressionism detailed painting strokes", "wall hanging, frame, border, margin, low quality, signature, artist").subscribe((result) => {
+    //   this.artGenerator.scale(result.images[0]).subscribe((result) => {
+    //     this.art.nativeElement.src = `data:img/png;base64,${result.image}`
+    //   });
+    // });  
   }
 
 }

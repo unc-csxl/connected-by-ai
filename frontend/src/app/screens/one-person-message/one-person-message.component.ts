@@ -13,8 +13,6 @@ export class OnePersonMessageComponent implements OnChanges {
   @Input('state')
   state!: State;
 
-  ngOnChanges(): void {
-    console.log(this.state);
-  }
+  ngOnChanges(): void {}
 
 }

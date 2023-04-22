@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, EnvironmentInjector, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import { MockAppEventsService } from '../mock-app-events.service';
 import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
-import { AppEvent, AppEventType, AppEventsService } from '../app-events.service';
+import { AppEvent, AppEventType, AppEventsService, IAppEventsService } from '../app-events.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 export enum State {
@@ -32,6 +32,7 @@ export class UserInterfaceComponent implements AfterViewInit {
 
   State = State;
 
+  private appEvents!: IAppEventsService;
   events$?: Observable<AppEvent>;
   eventsSubscription!: Subscription;
 
@@ -46,6 +47,7 @@ export class UserInterfaceComponent implements AfterViewInit {
     if (this.events$) { return; }
 
     if (this.test) {
+      this.appEvents = this.mockEventsService;
       this.events$ = this.mockEventsService.events$;
       this.eventsSubscription = this.events$.subscribe((event) => this.onEvent(event));
     } else {

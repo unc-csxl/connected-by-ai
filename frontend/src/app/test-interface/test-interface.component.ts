@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AppEventType } from '../app-events.service';
 import { MockAppEventsService } from '../mock-app-events.service';
+import testImage from "./generated-image";
 
 @Component({
   selector: 'app-test-interface',
@@ -14,7 +15,11 @@ export class TestInterfaceComponent {
   constructor(private events: MockAppEventsService) {}
   
   event(type: AppEventType) {
-    this.events.emit({type});
+    if (type == AppEventType.GENERATION_COMPLETED) {
+      this.events.emit({type, data: testImage})
+    } else {
+      this.events.emit({type});
+    }
   }
 
 }
