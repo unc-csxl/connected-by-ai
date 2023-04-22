@@ -16,8 +16,13 @@
     margin: auto 80px;
 }
 
+img {
+    margin: auto 80px;
+    height: 175px;
+}
+
 .divider-bar {
-    height: 400px;
+    height: 350px;
     width: 2px;
     background-color: white;
 }

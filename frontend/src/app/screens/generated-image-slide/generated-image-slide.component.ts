@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ArtGeneratorService } from 'src/app/art-generator.service';
 
 @Component({
   selector: 'app-generated-image-slide',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./generated-image-slide.component.css']
 })
 export class GeneratedImageSlideComponent {
+
+  constructor(public artGenerator: ArtGeneratorService) {}
 
 }

@@ -15,11 +15,7 @@ export class TestInterfaceComponent {
   constructor(private events: MockAppEventsService) {}
   
   event(type: AppEventType) {
-    if (type == AppEventType.GENERATION_COMPLETED) {
-      this.events.emit({type, data: testImage})
-    } else {
-      this.events.emit({type});
-    }
+    this.events.emit({type});
   }
 
 }

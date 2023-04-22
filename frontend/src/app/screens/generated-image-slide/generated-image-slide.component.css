@@ -7,7 +7,6 @@
 }
 
 .page-container {
-    background-image: url(../../assets/example-art.png);
     height: 100vh;
     background-repeat: no-repeat;
     background-position: center;
@@ -42,4 +41,9 @@
 
 .inner-circle {
     transform: translateX(15px);
+}
+
+img {
+    width: 100%;
+    position: fixed;
 }

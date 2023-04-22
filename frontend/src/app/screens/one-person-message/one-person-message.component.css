@@ -13,7 +13,6 @@
 }
 
 .page-container {
-    background-image: url(../../../assets/example-art.png);
     height: 100vh;
     background-repeat: no-repeat;
     background-position: center;
@@ -61,4 +60,9 @@
     color: white;
     text-align: center;
     margin: 10px 0;
+}
+
+img {
+    width: 100%;
+    position: fixed;
 }

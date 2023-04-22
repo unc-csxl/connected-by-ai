@@ -2,6 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { PoseEstimationService } from './pose-estimation.service';
 import * as poseDetection from '@tensorflow-models/pose-detection'
 import { Observable, Subject, Subscription, distinctUntilChanged } from 'rxjs';
+import { ArtGeneratorService, ArtGeneratorState } from './art-generator.service';
 
 export enum AppEventType {
   NOBODY = "NOBODY",
@@ -35,7 +36,6 @@ type TwoWaveEvent = {
 
 type GenerationCompletedEvent = {
   type: AppEventType.GENERATION_COMPLETED;
-  data: string;
 }
 
 export type AppEvent =
@@ -48,7 +48,6 @@ export type AppEvent =
 
 export interface IAppEventsService extends OnDestroy {
   events$: Observable<AppEvent>;
-  generateArt(): void;
 }
 
 @Injectable({
@@ -65,16 +64,22 @@ export class AppEventsService implements IAppEventsService {
 
   private events: Subject<AppEvent> = new Subject();
   public events$: Observable<AppEvent> = this.events.asObservable().pipe(distinctUntilChanged((prev, curr) => prev.type === curr.type));
+  artGenerationSubscription: Subscription;
 
-  constructor(poseEstimation: PoseEstimationService) {
-    this.poseSubscription = poseEstimation.poses$.subscribe((poses) => this.process(poses));
+  constructor(poseEstimation: PoseEstimationService, artGenerationService: ArtGeneratorService) {
+    this.poseSubscription = poseEstimation.poses$.subscribe((poses) => this.processPose(poses));
+    this.artGenerationSubscription = artGenerationService.state$.subscribe((state) => this.processArtGeneration(state));
   }
 
-  public generateArt(): void {
-
+  private processArtGeneration(state: ArtGeneratorState) {
+    if (state.state === 'complete') {
+      this.events.next({
+        type: AppEventType.GENERATION_COMPLETED,
+      })
+    }
   }
 
-  private process(poses: poseDetection.Pose[]): void {
+  private processPose(poses: poseDetection.Pose[]): void {
     // Here we focus on filling the pose detection buffer before continuing on
     this.poseBufferIndex = (this.poseBufferIndex + 1);
     if (!this.poseBufferFilled) {
@@ -206,6 +211,7 @@ export class AppEventsService implements IAppEventsService {
 
   ngOnDestroy(): void {
     this.poseSubscription.unsubscribe();
+    this.artGenerationSubscription.unsubscribe();
   }
 
 }

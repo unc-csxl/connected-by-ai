@@ -1,3 +1,5 @@
+<img *ngIf="artGenerator.art$ | async as art" [src]="'data:img/png;base64,' + art[0]">
+
 <div class="page-container">
 
     <div class="bottom-container">
@@ -13,10 +15,10 @@
                 fill="white" />
         </svg>
 
-        <div class="profile-container">
+        <!-- <div class="profile-container">
             <div class="profile inner-circle"></div>
             <div class="profile"></div>
-        </div>
+        </div> -->
 
     </div>
 

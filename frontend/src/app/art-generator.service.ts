@@ -41,7 +41,7 @@ type CompleteState = {
   image: string;
 };
 
-type ArtGeneratorState =
+export type ArtGeneratorState =
   | IdleState
   | GeneratingState
   | UpscalingState
@@ -55,6 +55,10 @@ export class ArtGeneratorService {
   private currentState: ArtGeneratorState = {state: 'idle'};
   private state: Subject<ArtGeneratorState> = new BehaviorSubject<ArtGeneratorState>(this.currentState);
   public state$: Observable<ArtGeneratorState> = this.state.asObservable();
+
+  private currentArt: string[] = [];
+  private art: Subject<string[]> = new BehaviorSubject<string[]>(this.currentArt);
+  public art$: Observable<string[]> = this.art.asObservable();
 
   constructor(private httpClient: HttpClient) {}
 
@@ -77,17 +81,19 @@ export class ArtGeneratorService {
 
     const progressSubscription = interval(1000).subscribe(() => {
       this.httpClient.get<ProgressResult>('/sdapi/v1/progress', { params: {skip_current_image: false}})
-        .subscribe((progress) => this.updateState({
-          state: 'generating',
-          progress: progress.progress,
-          step: progress.state.sampling_step,
-          steps: progress.state.sampling_steps,
-          image: progress.current_image
-        }));
+        .subscribe((progress) => {
+          if (progress.state.sampling_step > progress.state.sampling_steps) { progressSubscription.unsubscribe(); return; }
+          this.updateState({
+            state: 'generating',
+            progress: progress.progress,
+            step: progress.state.sampling_step,
+            steps: progress.state.sampling_steps,
+            image: progress.current_image
+          });
+        });
     });
 
     requestObservable.subscribe((result) => {
-      progressSubscription.unsubscribe();
       this.updateState({state: 'generating', progress: 1.0, step: steps, steps, image: result.images[0]});
       this.upscale(result.images[0]);
     });
@@ -109,6 +115,11 @@ export class ArtGeneratorService {
       "image": image
     }).subscribe((upscaled) => {
       this.updateState({state: 'complete', image: upscaled.image});
+      this.currentArt.unshift(upscaled.image);
+      if (this.currentArt.length > 10) {
+        this.currentArt.pop();
+      }
+      this.art.next(this.currentArt);
     });
   }
   

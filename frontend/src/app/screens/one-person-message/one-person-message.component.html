@@ -1,3 +1,13 @@
+<div *ngIf="artGenerator.art$ | async as art">
+    <div *ngIf="(imageIndex$ | async) as index">
+        <img *ngIf="index === 1" [src]="'data:img/png;base64,' + art[index - 1]">
+        <img *ngIf="index === 2" [src]="'data:img/png;base64,' + art[index - 1]">
+        <img *ngIf="index === 3" [src]="'data:img/png;base64,' + art[index - 1]">
+        <img *ngIf="index === 4" [src]="'data:img/png;base64,' + art[index - 1]">
+        <img *ngIf="index === 5" [src]="'data:img/png;base64,' + art[index - 1]">
+    </div>
+</div>
+
 <div class="page-container">
 
     <div class="message-container" [ngSwitch]="state">
@@ -19,10 +29,10 @@
                 fill="white" />
         </svg>
 
-        <div class="profile-container">
+        <!-- <div class="profile-container">
             <div class="profile inner-circle"></div>
             <div class="profile"></div>
-        </div>
+        </div> -->
 
     </div>
 
