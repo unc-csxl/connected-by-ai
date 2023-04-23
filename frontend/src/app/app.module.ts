@@ -17,7 +17,7 @@ import { UserInterfaceComponent } from './user-interface/user-interface.componen
 import { TestInterfaceComponent } from './test-interface/test-interface.component';
 import { IntroductionScreenComponent } from './screens/introduction-screen/introduction-screen.component';
 import { GeneratedImageSlideComponent } from './screens/generated-image-slide/generated-image-slide.component';
-import { OnePersonMessageComponent } from './screens/one-person-message/one-person-message.component';
+import { HomeScreenComponent } from './screens/home-screen/home-screen.component';
 import { InstructionsScreenComponent } from './screens/instructions-screen/instructions-screen.component';
 import { GeneratingArtComponent } from './screens/generating-art/generating-art.component';
 import { ArtTestComponent } from './art-test/art-test.component';
@@ -30,7 +30,7 @@ import { ArtTestComponent } from './art-test/art-test.component';
     TestInterfaceComponent,
     IntroductionScreenComponent,
     GeneratedImageSlideComponent,
-    OnePersonMessageComponent,
+    HomeScreenComponent,
     InstructionsScreenComponent,
     GeneratingArtComponent,
     ArtTestComponent,

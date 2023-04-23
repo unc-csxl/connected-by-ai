@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { PoseEstimationService } from '../pose-estimation.service';
 
 import * as poseDetection from '@tensorflow-models/pose-detection'
-import { Observable } from 'rxjs';
+import { Observable, map, merge, mergeAll, timeInterval, windowTime } from 'rxjs';
 import { AppEvent, AppEventsService } from '../app-events.service';
 
 @Component({

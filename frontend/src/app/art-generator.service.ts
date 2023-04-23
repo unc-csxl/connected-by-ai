@@ -116,7 +116,7 @@ export class ArtGeneratorService {
     }).subscribe((upscaled) => {
       this.updateState({state: 'complete', image: upscaled.image});
       this.currentArt.unshift(upscaled.image);
-      if (this.currentArt.length > 10) {
+      if (this.currentArt.length > 6) {
         this.currentArt.pop();
       }
       this.art.next(this.currentArt);

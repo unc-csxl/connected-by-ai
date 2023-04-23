@@ -23,6 +23,7 @@
 }
 
 .svg-sizing {
+    z-index: 100;
     height: 50px;
     opacity: 50%;
 }
@@ -50,9 +51,17 @@
 }
 
 .message-container {
+    z-index: 100;
     height: 65px;
     background-color: rgba(0, 0, 0, 0.612);
     backdrop-filter: blur(8px);
+}
+
+.message-container p {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 0;
 }
 
 .message-text {
@@ -64,5 +73,46 @@
 
 img {
     width: 100%;
+    height: 100%;
     position: fixed;
+}
+
+.title-container {
+    position: fixed;
+    top: 0;
+    z-index: 200;
+    width: 100%;
+    height: 100%;
+}
+
+.divider-bar {
+    height: 350px;
+    width: 2px;
+    background-color: white;
+}
+
+.title-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.300);
+    backdrop-filter: blur(4px);
+}
+
+.element-container {
+    display: flex;
+    justify-content: center;
+    margin: auto 0;
+}
+
+.title {
+    font-size: 25pt;
+    margin: auto 80px;
+    color: white;
+}
+
+.svg-full-logo {
+    height: 175px;
+    margin: auto 80px;
 }
