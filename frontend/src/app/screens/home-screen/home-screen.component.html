@@ -9,7 +9,7 @@
 </div>
 
 <div class="page-container">
-    <div *ngIf="(showTitle$ | async) === false" class="message-container">
+    <div *ngIf="(showTitle$ | async) === false" class="message-container" @fade>
         <p class="message-text">Hello! To experience Connected by AI with a friend, please raise your hands, smile, and wave at the camera.</p>
     </div>
 </div>
