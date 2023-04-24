@@ -39,18 +39,18 @@ export class HomeScreenComponent implements OnChanges {
     this.imageIndex$ = artGenerator.art$
       .pipe(
         filter(images => images.length > 0),
-        mergeMap(images => timer(0, 20000).pipe(map((index) => (index % images.length) + 1))),
+        mergeMap(images => timer(0, 30000).pipe(map((index) => (index % images.length) + 1))),
         distinctUntilChanged(),
       );
 
-    this.showTitle$ = concat(of(false), timer(17500, 5000).pipe(map(this.counter()), shareReplay(1)));
+    this.showTitle$ = concat(of(false), timer(25000, 10000).pipe(map(this.counter()), shareReplay(1)));
   }
 
   private counter() {
     let counter = 0;
     return () => {
       counter += 1;
-      return counter % 4 === 1;
+      return counter % 3 === 1;
     }
   }
 
