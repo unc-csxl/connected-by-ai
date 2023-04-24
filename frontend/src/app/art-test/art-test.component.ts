@@ -18,7 +18,8 @@ export class ArtTestComponent implements AfterViewInit {
   @ViewChild('art') art!: ElementRef<HTMLImageElement>;
 
   constructor(public artGenerator: ArtGeneratorService) {
-    this.artGenerator.generate("well lit high resolution detailed dogwood trees in the spring morning sunshine in north carolina in the style of georges seurat impressionism detailed painting strokes", "wall hanging, frame, border, margin, low quality, signature, artist");
+    // this.artGenerator.generate("well lit high resolution detailed dogwood trees in the spring morning sunshine in north carolina in the style of georges seurat impressionism detailed painting strokes", "wall hanging, frame, border, margin, low quality, signature, artist");
+    this.artGenerator.generate("well lit high resolution detailed dogwood trees and poplar trees in the spring morning sunshine with flowers in north carolina in the style of georges seurat impressionism detailed painting strokes", "wall hanging, frame, border, margin, low quality, signature, artist");
   }
 
   ngAfterViewInit(): void {
