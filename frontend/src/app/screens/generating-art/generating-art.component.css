@@ -31,11 +31,19 @@ body {
 
 .svg-sizing {
     height: 175px;
+    width: 15%;
     stroke-dasharray: 1000;
     stroke-dashoffset: 0;
     animation: dash 20s both;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
+}
+
+svg {
+    overflow: visible;
+    width: 400px;
+    margin: auto;
+    text-align: center;
 }
 
 @keyframes dash {
@@ -70,6 +78,7 @@ body {
 .element-container {
     z-index: 200;
     padding: 10px;
+    text-align: center;
 }
 
 svg path {
@@ -79,12 +88,11 @@ svg path {
 .art-container {
     position: fixed;
     top: 0;
-    background: green;
     height: 100%;
     width: 100%;
 }
 
-.ng-star-inserted {
+img.ng-star-inserted {
     position: absolute;
     height: 100%;
     width: 100%;

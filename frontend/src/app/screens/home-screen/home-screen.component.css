@@ -20,6 +20,11 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    top: 0;
+}
+
+.page-container p {
+    top: 0;
 }
 
 .svg-sizing {

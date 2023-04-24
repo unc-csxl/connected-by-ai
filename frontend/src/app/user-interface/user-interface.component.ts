@@ -11,7 +11,8 @@ export enum State {
   ONE_PERSON_WAVING = "ONE_PERSON_WAVING",
   TWO_PEOPLE_WAVING = "TWO_PEOPLE_WAVING",
   GENERATING = "GENERATING",
-  PRESENTING = "PRESENTING"
+  PRESENTING = "PRESENTING",
+  RESET = "RESET"
 };
 
 @Component({
@@ -78,16 +79,10 @@ export class UserInterfaceComponent implements AfterViewInit {
      */
     switch(this.currentState) {
       case State.IDLE:
-        this.handleIdleEvent(event);
-        break;
       case State.ONE_PERSON:
-        this.handleOnePersonEvent(event);
-        break;
       case State.MULTIPLE_PEOPLE:
-        this.handleMultiplePeopleEvent(event);
-        break;
       case State.ONE_PERSON_WAVING:
-        this.handleOneWavingEvent(event);
+        this.handleMultiplePeopleEvent(event);
         break;
       case State.GENERATING:
         this.handleGeneratingEvent(event);
@@ -102,6 +97,9 @@ export class UserInterfaceComponent implements AfterViewInit {
     switch (event.type) {
       case AppEventType.ONE_PERSON:
         this.changeState(State.ONE_PERSON);
+        break;
+      case AppEventType.MULTIPLE_PEOPLE:
+        this.changeState(State.MULTIPLE_PEOPLE);
         break;
       case AppEventType.MULTIPLE_PEOPLE:
         this.changeState(State.MULTIPLE_PEOPLE);

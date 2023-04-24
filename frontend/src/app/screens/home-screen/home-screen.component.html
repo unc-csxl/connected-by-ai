@@ -1,4 +1,4 @@
-<div *ngIf="artGenerator.art$ | async as art">
+<div *ngIf="(artGenerator.art$ | async) as art">
     <div *ngIf="(imageIndex$ | async) as index">
         <img *ngIf="index === 1" [src]="'data:img/png;base64,' + art[index - 1]" @fade>
         <img *ngIf="index === 2" [src]="'data:img/png;base64,' + art[index - 1]" @fade>
@@ -9,10 +9,8 @@
 </div>
 
 <div class="page-container">
-    <div *ngIf="(showTitle$ | async) === false && state != State.IDLE" class="message-container" [ngSwitch]="state" @fade>
-        <p class="message-text" *ngSwitchCase="State.ONE_PERSON" @fadeFast>Welcome! To begin your journey, make a new friend or find a peer to share the experience of <em>Connected by AI</em> together.</p>
-        <p class="message-text" *ngSwitchCase="State.MULTIPLE_PEOPLE" @fadeFast>We're thrilled to have you in Sitterson Hall! To craft an original <em>Artisinal Inference</em> masterpiece, kindly smile and wave at the exhibit.</p>
-        <p class="message-text" *ngSwitchCase="State.ONE_PERSON_WAVING" @fadeFast>Hello! You and a peer need to keep smiling and waving at the exhibit to summon its creative energy!</p>
+    <div *ngIf="(showTitle$ | async) === false" class="message-container">
+        <p class="message-text">Hello! To experience Connected by AI with a friend, please raise your hands, smile, and wave at the camera.</p>
     </div>
 </div>
 

@@ -7,7 +7,11 @@
                 [src]="'data:img/png;base64,' + state.image" @smoothEntrance>
             <img *ngIf="state.state == 'generating' && state.step >= 21 && state.step <= 30" width="100%"
                 [src]="'data:img/png;base64,' + state.image" @smoothEntrance>
-            <img *ngIf="state.state == 'generating' && state.step > 30" width="100%"
+            <img *ngIf="state.state == 'generating' && state.step > 30 && state.step <= 40" width="100%"
+                [src]="'data:img/png;base64,' + state.image" @smoothEntrance>
+            <img *ngIf="state.state == 'generating' && state.step > 40 && state.step <= 50" width="100%"
+                [src]="'data:img/png;base64,' + state.image" @smoothEntrance>
+            <img *ngIf="state.state == 'generating' && state.step > 50" width="100%"
                 [src]="'data:img/png;base64,' + state.image" @smoothEntrance>
             <img *ngIf="state.state == 'upscaling'" width="100%" [src]="'data:img/png;base64,' + state.image"
                 @smoothEntrance>
@@ -18,7 +22,7 @@
 </div>
 <div class="blur-container">&nbsp;</div>
 <div class="page-container">
-    <div class="element-container">
+    <div *ngIf="artGenerator.state$ | async as state" class="element-container">
         <svg id="Layer_3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 234.2 133">
             <path class="svg-sizing"
                 d="M0,25.5C0,24.7,.7,24,1.5,24H7.4c2.5,0,5,1.1,6.7,3l30,33c.5,.6,.5,1.4,0,2-.3,.3-.7,.5-1.1,.5s-.8-.2-1.1-.5L11.9,29c-1.1-1.2-2.8-2-4.4-2H1.5C.7,27,0,26.4,0,25.5Z"
@@ -67,6 +71,7 @@
                 stroke="white" />
         </svg>
 
-        <p class="generating-text">Nice to see you two.</p>
+        <p *ngIf="state.state == 'generating'" class="generating-text">I'm painting a unique piece of art for you and this moment.<br><br>While you're waiting, have you asked each other how you're doing?</p>
+        <p *ngIf="state.state == 'upscaling'" class="generating-text">Today's Connected by AI theme is <em>"Sunflowers"</em>.<br><br>Enjoy this painting I crafted <em>just for you</em>.</p>
     </div>
 </div>

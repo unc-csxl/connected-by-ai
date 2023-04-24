@@ -63,7 +63,7 @@ export class ArtGeneratorService {
   constructor(private httpClient: HttpClient) {}
 
   generate(prompt: string, negative_prompt: string): void {
-    let steps = 30;
+    let steps = 40;
     this.updateState({state: 'generating', progress: 0.0, step: 0, steps: steps, image: null});
 
     let requestObservable = this.httpClient.post<Txt2ImgResult>('/sdapi/v1/txt2img', 
@@ -78,7 +78,7 @@ export class ArtGeneratorService {
         "cfg_scale": 8.0,
       }
     );
-
+    
     const progressSubscription = interval(1000).subscribe(() => {
       this.httpClient.get<ProgressResult>('/sdapi/v1/progress', { params: {skip_current_image: false}})
         .subscribe((progress) => {
@@ -96,6 +96,7 @@ export class ArtGeneratorService {
     requestObservable.subscribe((result) => {
       this.updateState({state: 'generating', progress: 1.0, step: steps, steps, image: result.images[0]});
       this.upscale(result.images[0]);
+      progressSubscription.unsubscribe();
     });
   }
 

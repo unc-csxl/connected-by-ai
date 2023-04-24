@@ -16,7 +16,7 @@ import { ArtGeneratorService } from 'src/app/art-generator.service';
 export class GeneratingArtComponent {
 
   public constructor(public artGenerator: ArtGeneratorService) {
-    this.artGenerator.generate("well lit high resolution detailed dogwood trees in the spring morning sunshine in north carolina in the style of georges seurat impressionism detailed painting strokes", "wall hanging, frame, border, margin, low quality, signature, artist");
+    this.artGenerator.generate("highly detailed, realistic still life oil painting of sunflowers in the style of vincent van gogh with heavy brush strokes", "wall hanging frame border margin fake unrealistic low quality");
   }
 
 }

@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { State } from '../../user-interface/user-interface.component';
 import { ArtGeneratorService } from 'src/app/art-generator.service';
-import { Observable, distinctUntilChanged, filter, map, mergeMap, of, shareReplay, tap, timeout, timer } from 'rxjs';
+import { Observable, concat, distinctUntilChanged, filter, map, mergeMap, of, shareReplay, tap, timeout, timer } from 'rxjs';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
@@ -35,11 +35,11 @@ export class HomeScreenComponent implements OnChanges {
     this.imageIndex$ = artGenerator.art$
       .pipe(
         filter(images => images.length > 0),
-        mergeMap(images => timer(2500, 20000).pipe(map((index) => (index % images.length) + 1))),
+        mergeMap(images => timer(0, 20000).pipe(map((index) => (index % images.length) + 1))),
         distinctUntilChanged(),
       );
 
-    this.showTitle$ = timer(0, 5000).pipe(map(this.counter()), shareReplay(1));
+    this.showTitle$ = concat(of(false), timer(17500, 5000).pipe(map(this.counter()), shareReplay(1)));
   }
 
   private counter() {
