@@ -17,6 +17,10 @@ import { animate, style, transition, trigger } from '@angular/animations';
       transition(':enter', [style({ opacity: 0, zIndex: 20 }), animate("200ms ease-in", style({ opacity: 1, zIndex: 20 }))]),
       transition(':leave', [style({ opacity: 1, zIndex: 1 }), animate("100ms ease-in", style({ opacity: 0, zIndex: 1 }))]),
     ]),
+    trigger('fadeLogo', [
+      transition(':enter', [style({ opacity: 0, zIndex: 200 }), animate("2500ms ease-in", style({ opacity: 1, zIndex: 200 }))]),
+      transition(':leave', [style({ opacity: 1, zIndex: 200 }), animate("2500ms ease-in", style({ opacity: 0, zIndex: 200 }))]),
+    ]),
   ]
 })
 export class HomeScreenComponent implements OnChanges {
