@@ -24,9 +24,6 @@ body {
     color: white;
     font-size: 25pt;
     text-align: center;
-    animation: loading 10s both;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
 }
 
 .svg-sizing {

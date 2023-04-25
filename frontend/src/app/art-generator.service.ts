@@ -63,7 +63,7 @@ export class ArtGeneratorService {
   constructor(private httpClient: HttpClient) {}
 
   generate(prompt: string, negative_prompt: string): void {
-    let steps = 40;
+    let steps = 50;
     this.updateState({state: 'generating', progress: 0.0, step: 0, steps: steps, image: null});
 
     let requestObservable = this.httpClient.post<Txt2ImgResult>('/sdapi/v1/txt2img', 

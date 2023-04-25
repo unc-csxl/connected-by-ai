@@ -18,8 +18,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
       transition(':leave', [style({ opacity: 1, zIndex: 1 }), animate("100ms ease-in", style({ opacity: 0, zIndex: 1 }))]),
     ]),
     trigger('fadeLogo', [
-      transition(':enter', [style({ opacity: 0, zIndex: 200 }), animate("2500ms ease-in", style({ opacity: 1, zIndex: 200 }))]),
-      transition(':leave', [style({ opacity: 1, zIndex: 200 }), animate("2500ms ease-in", style({ opacity: 0, zIndex: 200 }))]),
+      transition(':enter', [style({ opacity: 0, zIndex: 200 }), animate("2000ms ease-in", style({ opacity: 1, zIndex: 200 }))]),
+      transition(':leave', [style({ opacity: 1, zIndex: 200 }), animate("2000ms ease-in", style({ opacity: 0, zIndex: 200 }))]),
     ]),
   ]
 })
@@ -39,11 +39,11 @@ export class HomeScreenComponent implements OnChanges {
     this.imageIndex$ = artGenerator.art$
       .pipe(
         filter(images => images.length > 0),
-        mergeMap(images => timer(0, 30000).pipe(map((index) => (index % images.length) + 1))),
+        mergeMap(images => timer(0, 20000).pipe(map((index) => (index % images.length) + 1))),
         distinctUntilChanged(),
       );
 
-    this.showTitle$ = concat(of(false), timer(25000, 10000).pipe(map(this.counter()), shareReplay(1)));
+    this.showTitle$ = concat(of(false), timer(17500, 5000).pipe(map(this.counter()), shareReplay(1)));
   }
 
   private counter() {
